@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var playButton: UIButton!
@@ -18,7 +19,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         playButton.setTitle("Play", forState: UIControlState.Normal)
+
         
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [MPMediaItemPropertyArtist : "Artist!",  MPMediaItemPropertyTitle : "Title!"]
+        
+       _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        
+          UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+           
     }
     
     override func didReceiveMemoryWarning() {
