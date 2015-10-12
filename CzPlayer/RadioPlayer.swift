@@ -22,17 +22,18 @@ class RadioPlayer {
         [
             "name": "Frekvence 1",
             "url": "http://icecast3.play.cz/frekvence1-128.mp3"
+        ],
+    
+        [
+            "name": "Radio Zurnal",
+            "url": "http://icecast8.play.cz/cro1-128.mp3"
+        ],
+        [
+            "name": "Kiss Hady",
+            "url": "http://icecast4.play.cz/kissjc128.mp3"
         ]
-]
+    ]
     /*
-        [
-            "name": "",
-            "url": "Rivera"
-        ],
-        [
-            "name": "Sonja",
-            "url": "Moreno"
-        ],
         [
             "firstName": "Noel",
             "lastName": "Bowen"
