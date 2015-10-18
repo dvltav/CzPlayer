@@ -62,6 +62,9 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = RadioPlayer.sharedInstance.stations[indexPath.item]["name"]
+        let image : UIImage = UIImage(named: RadioPlayer.sharedInstance.stations[indexPath.item]["image"]!)!
+        cell.imageView!.image = image
+        
         return cell
     }
     

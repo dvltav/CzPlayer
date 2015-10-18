@@ -17,20 +17,24 @@ class RadioPlayer {
      let  stations: [[String:String]] = [
         [
             "name": "Impuls",
-            "url": "http://icecast5.play.cz/impuls128.mp3"
+            "url": "http://icecast5.play.cz/impuls128.mp3",
+            "image": "impuls.png"
         ],
         [
             "name": "Frekvence 1",
-            "url": "http://icecast3.play.cz/frekvence1-128.mp3"
+            "url": "http://icecast3.play.cz/frekvence1-128.mp3",
+            "image": "frekvence1.png"
         ],
     
         [
             "name": "Radio Zurnal",
-            "url": "http://icecast8.play.cz/cro1-128.mp3"
+            "url": "http://icecast8.play.cz/cro1-128.mp3",
+            "image": "cro1.png"
         ],
         [
             "name": "Kiss Hady",
-            "url": "http://icecast4.play.cz/kissjc128.mp3"
+            "url": "http://icecast4.play.cz/kissjc128.mp3",
+            "image": "kissjc.png"
         ]
     ]
     /*
