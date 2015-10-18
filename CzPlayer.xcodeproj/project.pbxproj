@@ -10,7 +10,7 @@
 		B443A6581BC95062006B3227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A6571BC95062006B3227 /* AppDelegate.swift */; };
 		B443A65A1BC95062006B3227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A6591BC95062006B3227 /* ViewController.swift */; };
 		B443A65D1BC95062006B3227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B443A65B1BC95062006B3227 /* Main.storyboard */; };
-		B443A65F1BC95062006B3227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B443A65E1BC95062006B3227 /* Assets.xcassets */; };
+		B443A65F1BC95062006B3227 /* music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B443A65E1BC95062006B3227 /* music_icon.png */; };
 		B443A6621BC95062006B3227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B443A6601BC95062006B3227 /* LaunchScreen.storyboard */; };
 		B443A66A1BC950AF006B3227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B443A6691BC950AF006B3227 /* AVFoundation.framework */; };
 		B443A66C1BC9525D006B3227 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A66B1BC9525D006B3227 /* RadioPlayer.swift */; settings = {ASSET_TAGS = (); }; };
@@ -22,12 +22,13 @@
 		B443A6571BC95062006B3227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B443A6591BC95062006B3227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B443A65C1BC95062006B3227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B443A65E1BC95062006B3227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B443A65E1BC95062006B3227 /* music_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music_icon.png; path = ../../../../Downloads/music_icon.png; sourceTree = "<group>"; };
 		B443A6611BC95062006B3227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B443A6631BC95062006B3227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B443A6691BC950AF006B3227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B443A66B1BC9525D006B3227 /* RadioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		B443A66F1BD35921006B3227 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +47,7 @@
 		B443A64B1BC95062006B3227 = {
 			isa = PBXGroup;
 			children = (
+				B443A66F1BD35921006B3227 /* AVKit.framework */,
 				B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */,
 				B443A6691BC950AF006B3227 /* AVFoundation.framework */,
 				B443A6561BC95062006B3227 /* CzPlayer */,
@@ -68,7 +70,7 @@
 				B443A6591BC95062006B3227 /* ViewController.swift */,
 				B443A65B1BC95062006B3227 /* Main.storyboard */,
 				B443A66B1BC9525D006B3227 /* RadioPlayer.swift */,
-				B443A65E1BC95062006B3227 /* Assets.xcassets */,
+				B443A65E1BC95062006B3227 /* music_icon.png */,
 				B443A6601BC95062006B3227 /* LaunchScreen.storyboard */,
 				B443A6631BC95062006B3227 /* Info.plist */,
 			);
@@ -134,7 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B443A6621BC95062006B3227 /* LaunchScreen.storyboard in Resources */,
-				B443A65F1BC95062006B3227 /* Assets.xcassets in Resources */,
+				B443A65F1BC95062006B3227 /* music_icon.png in Resources */,
 				B443A65D1BC95062006B3227 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

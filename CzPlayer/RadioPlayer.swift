@@ -57,14 +57,9 @@ class RadioPlayer {
     }
     
     func play() {
-        if player.status != AVPlayerStatus.ReadyToPlay {
+       // if player.status != AVPlayerStatus.ReadyToPlay {
             play(stationIndex)
-        } else {
-        
-            player.play()
             isPlaying = true
-        }
-        
     }
     
     func speak(speach: String) {

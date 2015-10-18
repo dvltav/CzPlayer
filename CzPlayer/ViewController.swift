@@ -11,14 +11,14 @@ import AVFoundation
 import MediaPlayer
 
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     
     @IBOutlet weak var playButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        playButton.setTitle("Play", forState: UIControlState.Normal)
+       // playButton.setTitle("Play", forState: UIControlState.Normal)
 
         
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [MPMediaItemPropertyArtist : "Artist!",  MPMediaItemPropertyTitle : "Title!"]
@@ -58,5 +58,22 @@ class ViewController: UIViewController {
         RadioPlayer.sharedInstance.pause()
         playButton.setTitle("Play", forState: UIControlState.Normal)
     }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = RadioPlayer.sharedInstance.stations[indexPath.item]["name"]
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return RadioPlayer.sharedInstance.stations.count
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        RadioPlayer.sharedInstance.play(indexPath.item)
+    }
+    
+ 
+    
 }
 
