@@ -96,6 +96,10 @@ class RadioPlayer {
         speak(statInfo["name"]!)
         player = AVPlayer(URL: NSURL(string: statInfo["url"]!)!)
          MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [ MPMediaItemPropertyTitle : statInfo["name"]!]
+        
+        let albumArtWork = MPMediaItemArtwork(image: UIImage(named: statInfo["image"]!)!)
+        //albumArtWork.imageWithSize(CGSize(width: 200,height: 200))
+         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [ MPMediaItemPropertyArtwork : albumArtWork]
         player.play()
         isPlaying = true
     }
