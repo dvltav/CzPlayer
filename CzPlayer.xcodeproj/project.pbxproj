@@ -54,6 +54,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4358B3A1BD46235000DA5E0 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				B443A65E1BC95062006B3227 /* music_icon.png */,
+				B4358B321BD44CD7000DA5E0 /* kissjc.png */,
+				B4358B331BD44CD7000DA5E0 /* cro1.png */,
+				B4358B341BD44CD7000DA5E0 /* frekvence1.png */,
+				B4358B351BD44CD7000DA5E0 /* impuls.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		B443A64B1BC95062006B3227 = {
 			isa = PBXGroup;
 			children = (
@@ -76,15 +88,11 @@
 		B443A6561BC95062006B3227 /* CzPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				B4358B321BD44CD7000DA5E0 /* kissjc.png */,
-				B4358B331BD44CD7000DA5E0 /* cro1.png */,
-				B4358B341BD44CD7000DA5E0 /* frekvence1.png */,
-				B4358B351BD44CD7000DA5E0 /* impuls.png */,
+				B4358B3A1BD46235000DA5E0 /* icons */,
 				B443A6571BC95062006B3227 /* AppDelegate.swift */,
 				B443A6591BC95062006B3227 /* ViewController.swift */,
 				B443A65B1BC95062006B3227 /* Main.storyboard */,
 				B443A66B1BC9525D006B3227 /* RadioPlayer.swift */,
-				B443A65E1BC95062006B3227 /* music_icon.png */,
 				B443A6601BC95062006B3227 /* LaunchScreen.storyboard */,
 				B443A6631BC95062006B3227 /* Info.plist */,
 				B4358B301BD360B2000DA5E0 /* Images.xcassets */,
