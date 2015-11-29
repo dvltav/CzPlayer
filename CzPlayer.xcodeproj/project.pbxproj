@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B4358B311BD360B2000DA5E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4358B301BD360B2000DA5E0 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		B4358B361BD44CD7000DA5E0 /* kissjc.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B321BD44CD7000DA5E0 /* kissjc.png */; settings = {ASSET_TAGS = (); }; };
-		B4358B371BD44CD7000DA5E0 /* cro1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B331BD44CD7000DA5E0 /* cro1.png */; settings = {ASSET_TAGS = (); }; };
-		B4358B381BD44CD7000DA5E0 /* frekvence1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B341BD44CD7000DA5E0 /* frekvence1.png */; settings = {ASSET_TAGS = (); }; };
-		B4358B391BD44CD7000DA5E0 /* impuls.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B351BD44CD7000DA5E0 /* impuls.png */; settings = {ASSET_TAGS = (); }; };
+		B4358B311BD360B2000DA5E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4358B301BD360B2000DA5E0 /* Images.xcassets */; };
+		B4358B361BD44CD7000DA5E0 /* kissjc.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B321BD44CD7000DA5E0 /* kissjc.png */; };
+		B4358B371BD44CD7000DA5E0 /* cro1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B331BD44CD7000DA5E0 /* cro1.png */; };
+		B4358B381BD44CD7000DA5E0 /* frekvence1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B341BD44CD7000DA5E0 /* frekvence1.png */; };
+		B4358B391BD44CD7000DA5E0 /* impuls.png in Resources */ = {isa = PBXBuildFile; fileRef = B4358B351BD44CD7000DA5E0 /* impuls.png */; };
 		B443A6581BC95062006B3227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A6571BC95062006B3227 /* AppDelegate.swift */; };
 		B443A65A1BC95062006B3227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A6591BC95062006B3227 /* ViewController.swift */; };
 		B443A65D1BC95062006B3227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B443A65B1BC95062006B3227 /* Main.storyboard */; };
-		B443A65F1BC95062006B3227 /* music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B443A65E1BC95062006B3227 /* music_icon.png */; };
 		B443A6621BC95062006B3227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B443A6601BC95062006B3227 /* LaunchScreen.storyboard */; };
 		B443A66A1BC950AF006B3227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B443A6691BC950AF006B3227 /* AVFoundation.framework */; };
-		B443A66C1BC9525D006B3227 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A66B1BC9525D006B3227 /* RadioPlayer.swift */; settings = {ASSET_TAGS = (); }; };
+		B443A66C1BC9525D006B3227 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A66B1BC9525D006B3227 /* RadioPlayer.swift */; };
 		B443A66E1BC9A5A5006B3227 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */; };
+		B4A48E211C0B4D4400104C85 /* broadband-icon-120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A48E201C0B4D4400104C85 /* broadband-icon-120x120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,13 +32,13 @@
 		B443A6571BC95062006B3227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B443A6591BC95062006B3227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B443A65C1BC95062006B3227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B443A65E1BC95062006B3227 /* music_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music_icon.png; path = ../../../../Downloads/music_icon.png; sourceTree = "<group>"; };
 		B443A6611BC95062006B3227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B443A6631BC95062006B3227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B443A6691BC950AF006B3227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B443A66B1BC9525D006B3227 /* RadioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B443A66F1BD35921006B3227 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		B4A48E201C0B4D4400104C85 /* broadband-icon-120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "broadband-icon-120x120.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		B4358B3A1BD46235000DA5E0 /* icons */ = {
 			isa = PBXGroup;
 			children = (
-				B443A65E1BC95062006B3227 /* music_icon.png */,
+				B4A48E201C0B4D4400104C85 /* broadband-icon-120x120.png */,
 				B4358B321BD44CD7000DA5E0 /* kissjc.png */,
 				B4358B331BD44CD7000DA5E0 /* cro1.png */,
 				B4358B341BD44CD7000DA5E0 /* frekvence1.png */,
@@ -161,9 +161,9 @@
 				B4358B361BD44CD7000DA5E0 /* kissjc.png in Resources */,
 				B443A6621BC95062006B3227 /* LaunchScreen.storyboard in Resources */,
 				B4358B381BD44CD7000DA5E0 /* frekvence1.png in Resources */,
+				B4A48E211C0B4D4400104C85 /* broadband-icon-120x120.png in Resources */,
 				B4358B371BD44CD7000DA5E0 /* cro1.png in Resources */,
 				B4358B311BD360B2000DA5E0 /* Images.xcassets in Resources */,
-				B443A65F1BC95062006B3227 /* music_icon.png in Resources */,
 				B443A65D1BC95062006B3227 /* Main.storyboard in Resources */,
 				B4358B391BD44CD7000DA5E0 /* impuls.png in Resources */,
 			);
