@@ -9,24 +9,64 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import CoreLocation
 
 
-class ViewController: UITableViewController {
+class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var playButton: UIButton!
+    
+     var manager:CLLocationManager!
+    var timer:NSTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        // playButton.setTitle("Play", forState: UIControlState.Normal)
 
+   
+        manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.allowsBackgroundLocationUpdates = true
+        manager.distanceFilter  = 50 //500meters
+        //  manager.requestAlwaysAuthorization()
+        //manager.requestLocation()
+        manager.startUpdatingLocation()
+        
+        
+        RadioPlayer.sharedInstance.getWeather()
+        RadioPlayer.sharedInstance.getTravelTime()
         
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [MPMediaItemPropertyArtist : "Artist!",  MPMediaItemPropertyTitle : "Title!"]
         
        _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         
           UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
-           
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("wakeUp"), userInfo: nil, repeats: true)
+    
+
+    
+    }
+    
+    func wakeUp() {
+        print("wake up")
+        //manager.requestLocation()
+        if RadioPlayer.sharedInstance.isPlaying {
+            manager.startUpdatingLocation()
+            RadioPlayer.sharedInstance.getWeather()
+            RadioPlayer.sharedInstance.getTravelTime()
+        } else {
+            manager.stopUpdatingLocation()
+            RadioPlayer.sharedInstance.travelTime = "Paused"
+            RadioPlayer.sharedInstance.updateDisplay()
+        }
+        
+            
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,10 +113,34 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        RadioPlayer.sharedInstance.play(indexPath.item)
+        RadioPlayer.sharedInstance.stationIndex = indexPath.item
+        RadioPlayer.sharedInstance.playAtIndex()
     }
     
- 
+    //NOTE: [AnyObject] changed to [CLLocation]
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print(locations)
+        
+        //userLocation - there is no need for casting, because we are now using CLLocation object
+        
+        let userLocation:CLLocation = locations[0]
+        
+        RadioPlayer.sharedInstance.latitude = userLocation.coordinate.latitude
+        
+        RadioPlayer.sharedInstance.longitude = userLocation.coordinate.longitude
+        
+
+        
+        
+    }
+    
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
     
 }
 

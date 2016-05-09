@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 import MediaPlayer
+import CoreLocation
 
 class RadioPlayer {
     
@@ -47,12 +48,20 @@ class RadioPlayer {
 
     
     static let sharedInstance = RadioPlayer()
-    let speechSynthesizer = AVSpeechSynthesizer()
     
-    private var player = AVPlayer()
+    let speechSynthesizer = AVSpeechSynthesizer()
+    var weatherInfo: String = "none"
+    var travelTime: String = "no travel"
+    
+    var latitude:CLLocationDegrees = 0
+    
+    var longitude:CLLocationDegrees = 0
+    
+    
+     var player = AVPlayer()
     //private var player = nil
-    private var isPlaying = false
-    private var stationIndex = 0
+     var isPlaying = false
+     var stationIndex = 0
     
     
     func test(){
@@ -62,7 +71,7 @@ class RadioPlayer {
     
     func play() {
        // if player.status != AVPlayerStatus.ReadyToPlay {
-            play(stationIndex)
+            playAtIndex()
             isPlaying = true
     }
     
@@ -78,7 +87,7 @@ class RadioPlayer {
             stationIndex--
         }
         
-        play(stationIndex)
+        playAtIndex()
     }
     
     func nextStation() {
@@ -88,20 +97,31 @@ class RadioPlayer {
             stationIndex++
         }
         
-        play(stationIndex)
+        playAtIndex()
     }
     
-    func play(i: Int  ) {
-        var statInfo = stations[i]
-        speak(statInfo["name"]!)
+    func playAtIndex( ) {
+        var statInfo = stations[stationIndex]
         player = AVPlayer(URL: NSURL(string: statInfo["url"]!)!)
-         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [ MPMediaItemPropertyTitle : statInfo["name"]!]
-        
-        let albumArtWork = MPMediaItemArtwork(image: UIImage(named: statInfo["image"]!)!)
-        //albumArtWork.imageWithSize(CGSize(width: 200,height: 200))
-         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [ MPMediaItemPropertyArtwork : albumArtWork]
+        updateDisplay()
         player.play()
         isPlaying = true
+        MPNowPlayingInfoCenter.defaultCenter()
+    }
+    
+    func updateDisplay() {
+        var statInfo = stations[stationIndex]
+        
+        let albumArtWork = MPMediaItemArtwork(image: UIImage(named: statInfo["image"]!)!)
+        albumArtWork.imageWithSize(CGSize(width: 200,height: 200))
+        
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo =
+            [MPMediaItemPropertyArtist : weatherInfo,
+             MPMediaItemPropertyTitle : statInfo["name"]!,
+             MPMediaItemPropertyGenre : "genre",
+             MPMediaItemPropertyAlbumTitle : travelTime,
+             MPMediaItemPropertyArtwork : albumArtWork
+        ]
     }
     
     func pause() {
@@ -120,4 +140,103 @@ class RadioPlayer {
     func currentlyPlaying() -> Bool {
         return isPlaying
     }
+    
+    func getWeather() {
+        print("getWeather")
+        
+        let myURL = NSURL(string: "http://bigpi.info:500/weatherJson.php")
+        let request = NSMutableURLRequest(URL: myURL!)
+        request.HTTPMethod = "POST"
+        
+        // Compose a query string
+        let postString = "offset=" + String(0);
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
+            
+            if let urlConent = data {
+                do {
+                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(urlConent, options: NSJSONReadingOptions.MutableContainers)
+                    
+                    let date = jsonResult["date"] as! String
+                    let outTemp = jsonResult["outTemp"]as! Double
+                    let windGust = jsonResult["windGust"] as! Double
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("getWeather = \(outTemp)")
+                        self.weatherInfo = (NSString(format: "%.1f", outTemp) as String) + " º  " + (NSString(format: "%.0f", windGust) as String) + " mph"
+                        //self.lastUpdated.text = date
+ 
+                    })
+                    
+                } catch {
+                    print("Error reading JSON")
+                } //do
+            } //let
+        }//task
+        
+        task.resume()
+        
+    }
+    
+    func getTravelTime(){
+        print("getTravelTime")
+        
+        var destination:String!
+        var destinationTitle:String!
+
+        
+        let work = "715+Harrison,San+Sanfrisco"
+        let home = "2021+Alden,94002"
+        
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.Hour, fromDate: date)
+        let hour = components.hour
+        
+        //Going to work?
+        if hour < 12 {
+            print("work")
+            destination = work
+            destinationTitle = "Work "
+        } else {
+            destination = home
+            destinationTitle = "Home "
+        }
+        
+        
+        if latitude != 0.0 {
+        let toWork = "https://maps.googleapis.com/maps/api/directions/json?origin=\(latitude),\(longitude)&destination=\(destination)&key=AIzaSyCoKpjFl-j7eA2iWoLg1q7qRvrgnyHgafU"
+            
+        let myURL = NSURL(string: toWork)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(myURL!){ (data, response, error) -> Void in
+            
+            if let urlConent = data {
+                do {
+                    let parsed_json = try NSJSONSerialization.JSONObjectWithData(urlConent, options: NSJSONReadingOptions.MutableContainers)
+                    //print(parsed_json)
+                    let duration = parsed_json.valueForKeyPath("routes.legs.duration.text") as! NSArray
+
+                    print ("**************duration = \(duration[0])")
+                    let d1 = duration[0] as! [NSString]
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        //self.tableView.reloadData()
+                       self.travelTime = destinationTitle + (d1[0] as! String)
+                        self.updateDisplay()
+                    })
+                    
+                } catch {
+                    print("Error reading JSON")
+                } //do
+            } //let
+        }//task
+        
+        task.resume()
+        } // if
+    }
+    
+
 }
