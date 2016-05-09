@@ -52,6 +52,7 @@ class RadioPlayer {
     let speechSynthesizer = AVSpeechSynthesizer()
     var weatherInfo: String = "none"
     var travelTime: String = "no travel"
+    var arriveTime: String = "-:-"
     
     var latitude:CLLocationDegrees = 0
     
@@ -118,7 +119,7 @@ class RadioPlayer {
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo =
             [MPMediaItemPropertyArtist : weatherInfo,
              MPMediaItemPropertyTitle : statInfo["name"]!,
-             MPMediaItemPropertyGenre : "genre",
+             MPMediaItemPropertyGenre : arriveTime,
              MPMediaItemPropertyAlbumTitle : travelTime,
              MPMediaItemPropertyArtwork : albumArtWork
         ]
@@ -141,102 +142,9 @@ class RadioPlayer {
         return isPlaying
     }
     
-    func getWeather() {
-        print("getWeather")
-        
-        let myURL = NSURL(string: "http://bigpi.info:500/weatherJson.php")
-        let request = NSMutableURLRequest(URL: myURL!)
-        request.HTTPMethod = "POST"
-        
-        // Compose a query string
-        let postString = "offset=" + String(0);
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
-        
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
-            
-            if let urlConent = data {
-                do {
-                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(urlConent, options: NSJSONReadingOptions.MutableContainers)
-                    
-                    let date = jsonResult["date"] as! String
-                    let outTemp = jsonResult["outTemp"]as! Double
-                    let windGust = jsonResult["windGust"] as! Double
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        print("getWeather = \(outTemp)")
-                        self.weatherInfo = (NSString(format: "%.1f", outTemp) as String) + " º  " + (NSString(format: "%.0f", windGust) as String) + " mph"
-                        //self.lastUpdated.text = date
- 
-                    })
-                    
-                } catch {
-                    print("Error reading JSON")
-                } //do
-            } //let
-        }//task
-        
-        task.resume()
-        
-    }
+
     
-    func getTravelTime(){
-        print("getTravelTime")
-        
-        var destination:String!
-        var destinationTitle:String!
 
-        
-        let work = "715+Harrison,San+Sanfrisco"
-        let home = "2021+Alden,94002"
-        
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Hour, fromDate: date)
-        let hour = components.hour
-        
-        //Going to work?
-        if hour < 12 {
-            print("work")
-            destination = work
-            destinationTitle = "Work "
-        } else {
-            destination = home
-            destinationTitle = "Home "
-        }
-        
-        
-        if latitude != 0.0 {
-        let toWork = "https://maps.googleapis.com/maps/api/directions/json?origin=\(latitude),\(longitude)&destination=\(destination)&key=AIzaSyCoKpjFl-j7eA2iWoLg1q7qRvrgnyHgafU"
-            
-        let myURL = NSURL(string: toWork)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(myURL!){ (data, response, error) -> Void in
-            
-            if let urlConent = data {
-                do {
-                    let parsed_json = try NSJSONSerialization.JSONObjectWithData(urlConent, options: NSJSONReadingOptions.MutableContainers)
-                    //print(parsed_json)
-                    let duration = parsed_json.valueForKeyPath("routes.legs.duration.text") as! NSArray
-
-                    print ("**************duration = \(duration[0])")
-                    let d1 = duration[0] as! [NSString]
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        //self.tableView.reloadData()
-                       self.travelTime = destinationTitle + (d1[0] as! String)
-                        self.updateDisplay()
-                    })
-                    
-                } catch {
-                    print("Error reading JSON")
-                } //do
-            } //let
-        }//task
-        
-        task.resume()
-        } // if
-    }
     
 
 }

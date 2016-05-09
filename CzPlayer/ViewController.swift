@@ -16,7 +16,8 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var playButton: UIButton!
     
-     var manager:CLLocationManager!
+    var manager:CLLocationManager!
+    var ds:DataServices!
     var timer:NSTimer!
     
     override func viewDidLoad() {
@@ -25,19 +26,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
        // playButton.setTitle("Play", forState: UIControlState.Normal)
 
    
-        manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.allowsBackgroundLocationUpdates = true
-        manager.distanceFilter  = 50 //500meters
-        //  manager.requestAlwaysAuthorization()
-        //manager.requestLocation()
-        manager.startUpdatingLocation()
+        initGPS()
         
-        
-        RadioPlayer.sharedInstance.getWeather()
-        RadioPlayer.sharedInstance.getTravelTime()
+        ds = DataServices()
+        ds.getWeather()
+        ds.getTravelTime()
         
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [MPMediaItemPropertyArtist : "Artist!",  MPMediaItemPropertyTitle : "Title!"]
         
@@ -48,7 +41,6 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("wakeUp"), userInfo: nil, repeats: true)
     
 
-    
     }
     
     func wakeUp() {
@@ -56,17 +48,13 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         //manager.requestLocation()
         if RadioPlayer.sharedInstance.isPlaying {
             manager.startUpdatingLocation()
-            RadioPlayer.sharedInstance.getWeather()
-            RadioPlayer.sharedInstance.getTravelTime()
+            ds.getWeather()
+            ds.getTravelTime()
         } else {
             manager.stopUpdatingLocation()
             RadioPlayer.sharedInstance.travelTime = "Paused"
             RadioPlayer.sharedInstance.updateDisplay()
         }
-        
-            
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -117,6 +105,21 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         RadioPlayer.sharedInstance.playAtIndex()
     }
     
+  
+    
+    func initGPS() {
+        
+        manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.allowsBackgroundLocationUpdates = true
+        manager.distanceFilter  = 50 //500meters
+        //  manager.requestAlwaysAuthorization()
+        //manager.requestLocation()
+        manager.startUpdatingLocation()
+        
+    }
     //NOTE: [AnyObject] changed to [CLLocation]
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -131,12 +134,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         
         RadioPlayer.sharedInstance.longitude = userLocation.coordinate.longitude
         
-
-        
-        
     }
-    
-    
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Failed to find user's location: \(error.localizedDescription)")
