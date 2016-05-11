@@ -28,6 +28,11 @@ func addSecondsToCurrentTime(seconds: Int) -> Int {
 // let (h,m,s) = secondsToHoursMinutesSeconds(27005)
 
 
+    
+    //*************************
+    // getTravelTime
+    //************************
+    
 func getTravelTime(){
     print("getTravelTime")
     
@@ -47,15 +52,15 @@ func getTravelTime(){
     if hour < 12 {
         print("work")
         destination = work
-        destinationTitle = "Work "
+        destinationTitle = "W "
     } else {
         destination = home
-        destinationTitle = "Home "
+        destinationTitle = "H "
     }
     
     
     if RadioPlayer.sharedInstance.latitude != 0.0 {
-        let toWork = "https://maps.googleapis.com/maps/api/directions/json?origin=\(RadioPlayer.sharedInstance.latitude),\(RadioPlayer.sharedInstance.longitude)&destination=\(destination)&key=AIzaSyCoKpjFl-j7eA2iWoLg1q7qRvrgnyHgafU"
+        let toWork = "https://maps.googleapis.com/maps/api/directions/json?traffic_model=best_guess&departure_time=now&origin=\(RadioPlayer.sharedInstance.latitude),\(RadioPlayer.sharedInstance.longitude)&destination=\(destination)&key=AIzaSyCoKpjFl-j7eA2iWoLg1q7qRvrgnyHgafU"
         
         let myURL = NSURL(string: toWork)
         
@@ -65,7 +70,7 @@ func getTravelTime(){
                 do {
                     let parsed_json = try NSJSONSerialization.JSONObjectWithData(urlConent, options: NSJSONReadingOptions.MutableContainers)
                     //print(parsed_json)
-                    let duration = parsed_json.valueForKeyPath("routes.legs.duration.value") as! NSArray
+                    let duration = parsed_json.valueForKeyPath("routes.legs.duration_in_traffic.value") as! NSArray
                     
                     print ("**************duration = \(duration[0])")
                     let d1 = duration[0] as! [NSNumber]
@@ -89,6 +94,10 @@ func getTravelTime(){
     } // if
 }
     
+    
+    //*************************
+    // getWeather
+    //************************
     func getWeather() {
         print("getWeather")
         

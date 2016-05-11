@@ -119,8 +119,8 @@ class RadioPlayer {
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo =
             [MPMediaItemPropertyArtist : weatherInfo,
              MPMediaItemPropertyTitle : statInfo["name"]!,
-             MPMediaItemPropertyGenre : arriveTime,
-             MPMediaItemPropertyAlbumTitle : travelTime,
+             MPMediaItemPropertyGenre : travelTime,
+             MPMediaItemPropertyAlbumTitle : arriveTime,
              MPMediaItemPropertyArtwork : albumArtWork
         ]
     }
