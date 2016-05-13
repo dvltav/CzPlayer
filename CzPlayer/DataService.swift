@@ -73,14 +73,18 @@ func getTravelTime(){
                     let duration = parsed_json.valueForKeyPath("routes.legs.duration_in_traffic.value") as! NSArray
                     
                     print ("**************duration = \(duration[0])")
-                    let d1 = duration[0] as! [NSNumber]
+                    let d1 = duration[0][0] as! Int
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         //self.tableView.reloadData()
-                        let d2 = d1[0] as! Int
-                        let (h,m,s) = self.secondsToHoursMinutesSeconds( self.addSecondsToCurrentTime(d2))
-                        RadioPlayer.sharedInstance.arriveTime = destinationTitle + String(h) + ":" + String(m)
-                        RadioPlayer.sharedInstance.travelTime = String(d2/60) + "min"
+                        //let d2 = d1[0] as! Int
+                        let (h,m,s) = self.secondsToHoursMinutesSeconds( self.addSecondsToCurrentTime(d1))
+                        var mString = String(m)
+                        if mString.characters.count == 1 {
+                            mString = "0" + mString
+                        }
+                        RadioPlayer.sharedInstance.arriveTime = destinationTitle + String(h) + ":" + mString
+                        RadioPlayer.sharedInstance.travelTime = String(d1/60) + "min"
                         RadioPlayer.sharedInstance.updateDisplay()
                     })
                     
