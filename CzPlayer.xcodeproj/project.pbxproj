@@ -20,6 +20,7 @@
 		B443A66C1BC9525D006B3227 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B443A66B1BC9525D006B3227 /* RadioPlayer.swift */; };
 		B443A66E1BC9A5A5006B3227 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */; };
 		B4A48E211C0B4D4400104C85 /* broadband-icon-120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = B4A48E201C0B4D4400104C85 /* broadband-icon-120x120.png */; };
+		B4DE099C1CE6C59100CEBE7F /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DE099B1CE6C59100CEBE7F /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		B443A66D1BC9A5A5006B3227 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B443A66F1BD35921006B3227 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		B4A48E201C0B4D4400104C85 /* broadband-icon-120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "broadband-icon-120x120.png"; sourceTree = "<group>"; };
+		B4DE099B1CE6C59100CEBE7F /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				B4358B3A1BD46235000DA5E0 /* icons */,
 				B443A6571BC95062006B3227 /* AppDelegate.swift */,
 				B443A6591BC95062006B3227 /* ViewController.swift */,
+				B4DE099B1CE6C59100CEBE7F /* DataService.swift */,
 				B443A65B1BC95062006B3227 /* Main.storyboard */,
 				B443A66B1BC9525D006B3227 /* RadioPlayer.swift */,
 				B443A6601BC95062006B3227 /* LaunchScreen.storyboard */,
@@ -179,6 +182,7 @@
 				B443A66C1BC9525D006B3227 /* RadioPlayer.swift in Sources */,
 				B443A65A1BC95062006B3227 /* ViewController.swift in Sources */,
 				B443A6581BC95062006B3227 /* AppDelegate.swift in Sources */,
+				B4DE099C1CE6C59100CEBE7F /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
