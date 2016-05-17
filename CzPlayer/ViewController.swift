@@ -47,7 +47,8 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         print("wake up")
         //manager.requestLocation()
         if RadioPlayer.sharedInstance.isPlaying {
-            manager.startUpdatingLocation()
+            //manager.startUpdatingLocation()
+            manager.requestLocation()
             ds.getWeather()
             ds.getTravelTime()
         } else {
@@ -112,12 +113,12 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         manager = CLLocationManager()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
+        //manager.requestWhenInUseAuthorization()
         manager.allowsBackgroundLocationUpdates = true
-        manager.distanceFilter  = 50 //500meters
-        //  manager.requestAlwaysAuthorization()
-        //manager.requestLocation()
-        manager.startUpdatingLocation()
+        //manager.distanceFilter  = 50 //500meters
+        manager.requestAlwaysAuthorization()
+        manager.requestLocation()
+        //manager.startUpdatingLocation()
         
     }
     //NOTE: [AnyObject] changed to [CLLocation]
