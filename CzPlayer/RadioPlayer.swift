@@ -48,6 +48,7 @@ class RadioPlayer {
 
     
     static let sharedInstance = RadioPlayer()
+
     
     let speechSynthesizer = AVSpeechSynthesizer()
     var weatherInfo: String = "none"
@@ -123,6 +124,7 @@ class RadioPlayer {
              MPMediaItemPropertyAlbumTitle : arriveTime,
              MPMediaItemPropertyArtwork : albumArtWork
         ]
+                
     }
     
     func pause() {

@@ -12,13 +12,24 @@ import MediaPlayer
 import CoreLocation
 
 
-class ViewController: UITableViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate {
+    @IBOutlet var labelTemp: UILabel!
+    @IBOutlet var labelArrival: UILabel!
+    @IBOutlet var labelDuration: UILabel!
     
+
+    @IBOutlet var gpsToggle: UISwitch!
+    @IBOutlet var Button2: UIButton!
+    @IBOutlet var playButton2: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    
+    
     
     var manager:CLLocationManager!
     var ds:DataServices!
     var timer:NSTimer!
+    var gpsToggleOn = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +41,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         
         ds = DataServices()
         ds.getWeather()
-        ds.getTravelTime()
+        ds.getTravelTime(self)
         
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = [MPMediaItemPropertyArtist : "Artist!",  MPMediaItemPropertyTitle : "Title!"]
         
@@ -43,32 +54,60 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
     }
     
+ 
+    func updateLabels(){
+        labelTemp.text = RadioPlayer.sharedInstance.weatherInfo
+        labelArrival.text = RadioPlayer.sharedInstance.arriveTime
+        labelDuration.text = RadioPlayer.sharedInstance.travelTime
+    }
+
+    
     func wakeUp() {
         print("wake up")
-        //manager.requestLocation()
-        if RadioPlayer.sharedInstance.isPlaying {
-            //manager.startUpdatingLocation()
-            manager.requestLocation()
-            ds.getWeather()
-            ds.getTravelTime()
-        } else {
-            manager.stopUpdatingLocation()
-            RadioPlayer.sharedInstance.travelTime = "Paused"
-            RadioPlayer.sharedInstance.updateDisplay()
-        }
+            //manager.requestLocation()
+            if RadioPlayer.sharedInstance.isPlaying {
+                //manager.startUpdatingLocation()
+                if gpsToggleOn {
+                    manager.requestLocation()
+                    ds.getWeather()
+                    ds.getTravelTime(self)
+                }
+            } else {
+                manager.stopUpdatingLocation()
+                RadioPlayer.sharedInstance.travelTime = "Paused"
+                RadioPlayer.sharedInstance.arriveTime = "--"
+                RadioPlayer.sharedInstance.updateDisplay()
+            }
+        updateLabels()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func gpsTogglePressed(sender: AnyObject) {
+        gpsToggleOn = gpsToggle.on
+        if gpsToggleOn {
+            RadioPlayer.sharedInstance.travelTime = "Gps on"
+            RadioPlayer.sharedInstance.arriveTime = "--"
+            RadioPlayer.sharedInstance.updateDisplay()
+        } else {
+            RadioPlayer.sharedInstance.travelTime = "Gps off"
+            RadioPlayer.sharedInstance.arriveTime = "--"
+            RadioPlayer.sharedInstance.updateDisplay()
+        }
+        wakeUp()
+    }
+    
     @IBAction func buttonPressed1(sender: AnyObject) {
            toggle()
     }
-    
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func playPressed2(sender: AnyObject) {
         toggle()
+        wakeUp()
     }
+
     
     func toggle() {
         if RadioPlayer.sharedInstance.currentlyPlaying() {
@@ -80,33 +119,40 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     func playRadio() {
         RadioPlayer.sharedInstance.play()
-        playButton.setTitle("Pause", forState: UIControlState.Normal)
+        playButton2.setTitle("Pause", forState: UIControlState.Normal)
+        print("button")
     }
     
     func pauseRadio() {
         RadioPlayer.sharedInstance.pause()
-        playButton.setTitle("Play", forState: UIControlState.Normal)
+        playButton2.setTitle("Play", forState: UIControlState.Normal)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as UITableViewCell
+    
+    /////////Table///////////
+    
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        //let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
         cell.textLabel?.text = RadioPlayer.sharedInstance.stations[indexPath.item]["name"]
         let image : UIImage = UIImage(named: RadioPlayer.sharedInstance.stations[indexPath.item]["image"]!)!
         cell.imageView!.image = image
-        
+
         return cell
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return RadioPlayer.sharedInstance.stations.count
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return RadioPlayer.sharedInstance.stations.count
+        
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         RadioPlayer.sharedInstance.stationIndex = indexPath.item
         RadioPlayer.sharedInstance.playAtIndex()
     }
     
-  
+  /////////////GPS/////////////////
     
     func initGPS() {
         
@@ -140,6 +186,8 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
+    
+    
     
 }
 

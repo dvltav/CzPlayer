@@ -33,7 +33,9 @@ func addSecondsToCurrentTime(seconds: Int) -> Int {
     // getTravelTime
     //************************
     
-func getTravelTime(){
+    func getTravelTime(vc: ViewController) {
+    
+//func getTravelTime(){
     print("getTravelTime")
     
     var destination:String!
@@ -86,6 +88,7 @@ func getTravelTime(){
                         RadioPlayer.sharedInstance.arriveTime = destinationTitle + String(h) + ":" + mString
                         RadioPlayer.sharedInstance.travelTime = String(d1/60) + "min"
                         RadioPlayer.sharedInstance.updateDisplay()
+                        vc.updateLabels()
                     })
                     
                 } catch {
